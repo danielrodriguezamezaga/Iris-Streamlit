@@ -42,10 +42,10 @@ id = df.loc[df.index[-1], "id"]
 st.sidebar.markdown("<h1 style='text-align: center;'>Insert Data </h1>", 
             unsafe_allow_html=True)
 options_form = st.sidebar.form("options_form")
-sepal_length_insert = options_form.text_input("sepal_length")
-sepal_width_insert = options_form.text_input("sepal_width")
-petal_length_insert = options_form.text_input("petal_length")
-petal_width_insert = options_form.text_input("petal_width")
+sepal_length_insert = options_form.number_input("sepal_length")
+sepal_width_insert = options_form.number_input("sepal_width")
+petal_length_insert = options_form.number_input("petal_length")
+petal_width_insert = options_form.number_input("petal_width")
 species_insert = options_form.text_input("species")
 add_data = options_form.form_submit_button("Insert Data")
 if add_data:
@@ -65,8 +65,26 @@ if add_data:
     st.write(df)
     df.to_csv('iris.csv', index=False)
     
-
-
+### update data ###
+st.sidebar.markdown("<h1 style='text-align: center;'>Update last Data </h1>", 
+            unsafe_allow_html=True)
+options_form3 = st.sidebar.form("options_form3")
+id_update = options_form3.number_input("id")
+sepal_length_update = options_form3.number_input("sepal_length")
+sepal_width_update = options_form3.number_input("sepal_width")
+petal_length_update = options_form3.number_input("petal_length")
+petal_width_update = options_form3.number_input("petal_width")
+species_update = options_form3.text_input("species")
+updateData = options_form3.form_submit_button("Update Data")
+if updateData:
+    df = pd.read_csv('iris.csv')
+    df.loc[df.index[-1], "id"] = id_update
+    df.loc[df.index[-1], "sepal_width"] = sepal_length_update
+    df.loc[df.index[-1], "sepal_length"] = sepal_width_update
+    df.loc[df.index[-1], "petal_width"] = petal_length_update
+    df.loc[df.index[-1], "petal_length"] = petal_width_update
+    df.loc[df.index[-1], "species"] = species_update
+    df.to_csv('iris.csv', index=False)
 
 ### Iris Predict ###    
 # I import the already trained model from jupyter NoteBook 
